@@ -84,14 +84,14 @@ def check_account(username, password, count):
 
         captcha_url = 'http://2captcha.com/in.php?key=' + twocaptcha_key + '&method=userrecaptcha&googlekey='+ site_key + '&pageurl=' + site_url
         log_debug("2captcha request: {}".format(captcha_url))
-        response = requests.get('http://2captcha.com/in.php?key=' + twocaptcha_key + '&method=userrecaptcha&googlekey='+ site_key + '&pageurl=' + site_url)
+        response = requests.get(captcha_url)
         response_captcha = ''
         
         if response.content[:2] == 'OK':
           captcha_id = response.content[3:]
           #loop until we got the token
           while True:
-            response = requests.get('http://2captcha.com/res.php?key='+captcha_key+'&action=get&id='+captcha_id)
+            response = requests.get('http://2captcha.com/res.php?key='+ twocaptcha_key +'&action=get&id='+captcha_id)
             if response.content[:2] == 'OK':
               response_captcha = response.content[3:]
               break
@@ -108,7 +108,6 @@ def check_account(username, password, count):
           else:
             #something is wrong, restart the process
             check_account(username, password, count + 1)
-          log_debug(response)
         else:
           #something is wrong with 2captcha, restart the process
           check_account(username, password, count + 1)
