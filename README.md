@@ -10,13 +10,21 @@ Require a 2captcha account. Get yours [here](http://2captcha.com/?from=2242107) 
 * Loops multiple times to keep checking accounts for captcha.
 * Output banned, captcha, error & usable accounts to csv files.
 
-Put your accounts in `account.csv` with format: `username,password`
+Put your accounts in `account.csv` with format: 
+```
+username1,password1
+username2,password2
+```
 
 Edit your settings in `captCharmander.py`.
 
 Run `python captCharmander.py`
 
-Output multiple files with format: `username,password`
+Output multiple files with format: 
+```
+username1,password1
+username2,password2
+```
 
 * `ban.csv`: banned accounts
 * `captcha.csv`: accounts with captcha need to be solved
