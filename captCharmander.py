@@ -28,6 +28,8 @@ alt = 0.0 #altitude
 login_delay = 2 #delay after login
 debug = False
 twocaptcha_key = "YOUR_2CAPTCHA_KEY" #2captcha key. Get your here http://2captcha.com/?from=2242107 (referral link)
+use_hashing_server = False #True to enable hashing server support. See https://talk.pogodev.org/d/51-api-hashing-service-by-pokefarmer for more info.
+hashing_key = "YOUR_HASHING_KEY" #hashing key, you need this if you want to be on the latest API. Get it from https://talk.pogodev.org/d/51-api-hashing-service-by-pokefarmer. Depends on your usage but 150RPM should be more than enough in most cases.
 
 usernames = []
 passwords = []
@@ -54,9 +56,12 @@ def check_account(username, password, count):
       print("Trying to login with {}".format(username))
       
       api = PGoApi()
+      if use_hashing_server:
+        api.activate_hash_server(hashing_key)
       api.set_position(lat, lng, alt)
-      api.login(service, username, password)
+      api.set_authentication(service, username, password)
       time.sleep(login_delay)
+      api.app_simulation_login()
       req = api.create_request()
       req.check_challenge()
       response = req.call()

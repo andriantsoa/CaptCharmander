@@ -1,1 +1,1 @@
-git+https://github.com/pogodevorg/pgoapi.git#egg=pgoapi
+git+https://github.com/pogodevorg/pgoapi.git@develop#egg=pgoapi
