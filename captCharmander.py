@@ -59,9 +59,10 @@ def check_account(username, password, count):
       if use_hashing_server:
         api.activate_hash_server(hashing_key)
       api.set_position(lat, lng, alt)
-      api.set_authentication(service, username, password)
+      api.login(service, username, password)
+      # api.set_authentication(service, username, password)
       time.sleep(login_delay)
-      api.app_simulation_login()
+      # api.app_simulation_login()
       req = api.create_request()
       req.check_challenge()
       response = req.call()
